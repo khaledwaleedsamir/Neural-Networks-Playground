@@ -30,17 +30,19 @@ Two types of classifiers were trained on each feature set:
   - **Linear kernel**
   - **RBF (Radial Basis Function) kernel**
 
-## 📈 Results Summary
+### 📈 Results Summary Table
 
-| **Classifier**          | **Configuration**       | **Features**            |              |              |               |              |
-|---------------------|---------------------|--------------------------|--------------|--------------|---------------|--------------|
-|                     |                     | DCT Accuracy (%)        | DCT Time (s) | PCA Accuracy (%) | PCA Time (s) |
-| **K-Means Clustering** | Clusters = 1        | 79.30%                  | 7.95         | 82.30%           | 7.86         |
-|                     | Clusters = 4        | 88.25%                  | 8.43         | 89.70%           | 8.42         |
-|                     | Clusters = 16       | 92.40%                  | 9.03         | 93.70%           | 8.82         |
-|                     | Clusters = 32       | 93.80%                  | 9.66         | 94.30%           | 9.41         |
-| **SVM**             | Linear Kernel       | 91.10%                  | 3.70         | 89.55%           | 4.41         |
-|                     | RBF Kernel          | 96.35%                  | 7.26         | 95.30%           | 8.94         |
+| **Classifier**        | **Configuration** | **Features**            |              |              |               |              |
+|-----------------------|-------------------|--------------------------|--------------|--------------|---------------|--------------|
+|                       |                   |                          | **DCT**      |              | **PCA**       |              |
+|                       |                   |                          | Accuracy (%) | Time (s)     | Accuracy (%)  | Time (s)     |
+| **K-Means Clustering**| Clusters = 1      |                          | 79.30%       | 7.95         | 82.30%        | 7.86         |
+|                       | Clusters = 4      |                          | 88.25%       | 8.43         | 89.70%        | 8.42         |
+|                       | Clusters = 16     |                          | 92.40%       | 9.03         | 93.70%        | 8.82         |
+|                       | Clusters = 32     |                          | 93.80%       | 9.66         | 94.30%        | 9.41         |
+| **SVM**               | Linear Kernel     |                          | 91.10%       | 3.70         | 89.55%        | 4.41         |
+|                       | RBF Kernel        |                          | 96.35%       | 7.26         | 95.30%        | 8.94         |
+
 
 **Table 1** shows the results summary for the different combinations of the classifiers used and the feature extraction method, for the k-means clustering method it is noticed that the accuracy increases as the number of clusters increases this is because increasing the number of clusters per class allows K-means to model more complex variations within each digit. With 32 clusters, classes are subdivided into finer groups, leading to more accurate classification. Also, with 1 or 4 clusters, similar digits may overlap in feature space, making it hard for the model to distinguish between them. A higher number of clusters reduces this overlap by providing more specific decision boundaries. However, there is a trade-off when increasing the number of clusters as the processing time also increases and there is a diminishing return after a certain number of clusters where the improvement becomes minimal, and the processing time continues to increase.
 
