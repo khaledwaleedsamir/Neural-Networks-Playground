@@ -60,6 +60,10 @@ Below are confusion matrices for the **best-performing K-Means** and **best-perf
 
 ![Confusion Matrix – SVM with RBF kernal using DCT Features](image-1.png)
 
+**Figure 1** shows the confusion matrix for the best result obtained using the K-means. It is noticed that the classifier confuses the '4' and '9' this is because digits like '4' and '9' share visual features and K-means relies on clustering around centroids, which works best when features (PCA in this case) separate the digits well. PCA reduces dimensionality, which improves speed but may lose some distinctive details, causing confusion between visually similar digits.
+
+**Figure 2** shows the confusion matrix for the best result obtained using the SVM classifier. This confusion matrix has slightly stronger diagonal values and thus better overall performance. SVM with RBF kernel excels at handling non-linearly separable data, which explains better performance.
+
 ## 🧩 Key Conclusions
 
 - **PCA** significantly reduced feature dimensionality while preserving important information.
