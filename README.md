@@ -1,7 +1,7 @@
 # 🧠 Neural-Networks-Playground
 Welcome to the Neural-Networks-Playground — a journey through the evolving landscape of machine learning, from classical algorithms to cutting-edge large language models and agentic AI systems.
 
-This repository contains materials from my Neural Networks course, including assignments, applied labs, and personal experiments. It serves as a learning archive and a sandbox for trying out ideas beyond the classroom.
+This repository contains applied labs and personal experiments from my Neural Networks course. It serves as a learning archive and a sandbox for trying out ideas beyond the classroom.
 
 ## 🛠️ Projects
 
