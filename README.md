@@ -5,8 +5,6 @@ This repository contains applied labs and personal experiments from my Neural Ne
 
 ## 🛠️ Projects
 
-This repository includes practical projects that apply classical ML and modern deep learning techniques to real-world tasks. More projects will be added soon.
-
 ### [🧮 Classical Machine Learning on ReducedMNIST](./Classical%20ML)
 
 ### [🔊 Digit Speech Recognition with Spectrograms (FSDD)](./Speech%20Recognition%20from%20Speech%20Spectrum)
