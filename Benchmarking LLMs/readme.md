@@ -1,76 +1,68 @@
-# Arabic LLM Benchmarking: Q/A Evaluation across Dialects and Domains
+# Arabic LLM Benchmarking: MSA and Egyptian Dialect Q/A Evaluation
 
-## Overview
+This project benchmarks five Arabic-supporting Large Language Models (LLMs) on a 120-question Q/A dataset that covers Modern Standard Arabic (MSA) and Egyptian dialect. It evaluates the models on factual accuracy, fluency, dialectal comprehension, and hallucination rates using both automatic and human evaluation methods.
 
-This project benchmarks multiple Arabic-supporting Large Language Models (LLMs) on a 100-question Q/A dataset covering Modern Standard Arabic (MSA), Classical Arabic, and various dialects (e.g., Egyptian). The goal is to assess factual accuracy, fluency, dialectal comprehension, and hallucination rates.
+## 📋 Overview
 
-## Models Evaluated
+The models under test:
+- **GPT-4** (OpenAI)
+- **llama3-70b-8192** (Meta)
+- **gemma2-9b-it** (Google)
+- **allam-2-7b** (KSA)
+- **qwen-qwq-32b** (Qwen)
 
-* **Meta LLaMA3-70B** (`llama3-70b-8192` via Groq)
-* **DeepSeek-R1 Distilled LLaMA-70B** (`deepseek-r1-distill-llama-70b`)
-* **Gemma2-9B-IT** (Google multilingual model)
-* **Allam-2-7B** (Arabic-native model from KSA)
-* **Qwen-QWQ-32B** (multilingual model with Arabic capabilities)
-* **GPT-4.0 (OpenAI)** for comparison with commercial-grade LLMs
+### Dataset
+- **120 Q/A pairs**
+- **20 topics** with 6 questions each
+- Annotated with: 
+  - Gold (reference) answers
+  - Dialect and topic labels
+  - Human evaluation metrics
 
-## Dataset
 
-* **100 Q/A pairs** with gold-standard human-annotated answers
-* **5 questions from each of 20 topics** (e.g., History, Religion, Culture, Geography, Science, etc.)
-* Annotated with:
+## 📊 Evaluation Metrics
 
-  * Dialect used (MSA, Egyptian, etc.)
-  * Topic
+### ✅ Automatic Evaluation
+- **STS (Semantic Textual Similarity)**
+- **BERT Score (F1)**
 
-## Evaluation Criteria
+### 👩‍⚖️ Human Evaluation
+Scored from 1–5:
+- **Accuracy**
+- **Fluency**
+- **Relevance**
 
-### Automatic Metrics
+Binary:
+- **Hallucination** (Yes/No)
 
-* **BLEU**: Measures n-gram overlap between LLM output and gold answer.
-* **ROUGE**: Measures recall and overlap, especially for longer answers.
-* **STS (Semantic Textual Similarity)**: Measures meaning similarity beyond surface text.
 
-### Human Evaluation
+## 🛠️ Process Pipeline
 
-Scored from 1 to 5:
+1. Questions and answers were organized in an Excel sheet with dialect and topic metadata.
+2. A Python script was used to:
+   - Extract prompts
+   - Query models via OpenAI API (for GPT-4) and **Groq** platform (for other models)
+   - Store responses in the master Excel file
+3. Automatic metrics (STS & BERT Score) computed.
+4. Human annotators evaluated selected responses manually.
 
-* **Accuracy**: Is the answer factually correct?
-* **Fluency**: Is the answer grammatically and stylistically natural?
-* **Relevance**: Does the answer address the question fully?
-* **Hallucination**: Any incorrect or fabricated content?
 
-## Pipeline
+## 📈 Results Summary
 
-1. **Excel Preparation**: Master sheet with all questions, gold answers, dialect, topic, and placeholders for each LLM.
-2. **Answer Collection**: Python scripts call each LLM via its API and fill in the corresponding column in the Excel sheet.
-3. **Evaluation**:
+| Model             | STS Avg | BERT F1 | Accuracy | Fluency | Relevance | Hallucination |
+|------------------|---------|---------|----------|---------|-----------|----------------|
+| GPT-4            | 0.71    | 0.8737  | 4.76     | 4.99    | 4.97      | 0.83%          |
+| allam-2-7b       | 0.69    | 0.8630  | 4.71     | 4.54    | 4.81      | 7.5%           |
+| gemma2-9b-it     | 0.60    | 0.8475  | 3.73     | 4.15    | 3.85      | 30.83%         |
+| llama3-70b-8192  | 0.75    | 0.8662  | —        | —       | —         | —              |
+| qwen-qwq-32b     | 0.60    | 0.8215  | —        | —       | —         | —              |
 
-   * Automatic metrics calculated using `sacrebleu`, `rouge_score`, `sentence-transformers`
-   * Human evaluators fill in scores manually
+**Note:** Only three models were selected for manual review due to time constraints.
 
-## Requirements
 
-* Python 3.8+
-* `openpyxl`, `pandas`, `openai`, `groq`, `sacrebleu`, `rouge-score`, `sentence-transformers`
+## 💡 Future Work
 
-## How to Run
-
-1. Set up API keys in environment variables or config file
-2. Run `generate_excel.py` to create the base spreadsheet
-3. Run `generate_answers.py` for each model
-4. Run `evaluate_automatic.py` to compute BLEU, ROUGE, STS
-
-## Results (Sample Placeholder)
-
-| Model  | Avg BLEU | Avg ROUGE-L | Avg STS | Accuracy | Fluency | Relevance | Hallucination Rate |
-| ------ | -------- | ----------- | ------- | -------- | ------- | --------- | ------------------ |
-| LLaMA3 | 0.54     | 0.68        | 0.82    | 4.2      | 4.5     | 4.4       | 3%                 |
-
-## License
-
-MIT License
-
-## Contributors
-
-* \[Your Name Here]
-* \[Teammates, if any]
+- Expand dataset to 500–1000+ Q/A pairs
+- Incorporate more dialects
+- Include deeper linguistic error analysis
+- Build a GUI tool for streamlined human evaluation
